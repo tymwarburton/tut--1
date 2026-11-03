@@ -1,0 +1,197 @@
+/* ---------- Colours ---------- */
+:root {
+  --navy: #1e2a4a;
+  --gold: #d4a017;
+  --bg: #f4f1ea;
+  --card: #ffffff;
+  --text: #222222;
+  --muted: #9a9a9a;
+  --home: #2e8b57;
+  --away: #c0392b;
+}
+
+/* ---------- Page ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ---------- Header ---------- */
+.hero {
+  background: var(--navy);
+  color: white;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  border-bottom: 6px solid var(--gold);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 2.8rem;
+  color: var(--gold);
+  letter-spacing: 2px;
+}
+
+.hero p {
+  margin: 0.5rem 0 0;
+  font-size: 1.1rem;
+}
+
+/* ---------- Main area ---------- */
+.container {
+  width: min(92%, 700px);
+  margin: 2rem auto;
+}
+
+/* ---------- Stats ---------- */
+.stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat {
+  flex: 1;
+  background: var(--card);
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stat .number {
+  display: block;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--navy);
+}
+
+.stat .label {
+  color: var(--muted);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+/* ---------- Filter buttons ---------- */
+.filters {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.filter {
+  background: white;
+  border: 2px solid var(--navy);
+  color: var(--navy);
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.filter:hover,
+.filter.active {
+  background: var(--navy);
+  color: white;
+}
+
+/* ---------- Table ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+th {
+  background: var(--navy);
+  color: white;
+  text-align: left;
+  padding: 0.8rem;
+}
+
+td {
+  padding: 0.7rem 0.8rem;
+  border-bottom: 1px solid #eeeeee;
+}
+
+td:first-child,
+th:first-child,
+td:last-child,
+th:last-child {
+  text-align: center;
+  width: 60px;
+}
+
+tr:hover td {
+  background: #fbf6e6;
+}
+
+tr.none td {
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* H / A badges */
+.badge {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+.badge.h {
+  background: var(--home);
+}
+
+.badge.a {
+  background: var(--away);
+}
+
+/* ---------- Note ---------- */
+.note {
+  margin-top: 1.5rem;
+  background: var(--card);
+  border-left: 6px solid var(--gold);
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.note h2 {
+  margin-top: 0;
+  color: var(--navy);
+}
+
+/* ---------- Footer ---------- */
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 1.5rem;
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 500px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  td,
+  th {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}

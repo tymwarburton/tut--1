@@ -1,0 +1,13 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/favicon.ico"
+  to = "/assets/favicon.svg"
+  status = 200
+
+# Any unknown page shows the fixtures page with a 404 status
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 404
