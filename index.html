@@ -38,6 +38,13 @@
         <button type="button" class="filter" data-filter="away">Away</button>
       </div>
 
+      <!-- Score editing -->
+      <div class="score-tools">
+        <button type="button" class="tool" id="edit-scores">Edit scores</button>
+        <button type="button" class="tool" id="save-scores" hidden>Save scores</button>
+        <span id="save-message"></span>
+      </div>
+
       <!-- Fixtures table -->
       <table>
         <thead>
@@ -45,6 +52,7 @@
             <th>Wk</th>
             <th>Fixture</th>
             <th>H/A</th>
+            <th>Score</th>
           </tr>
         </thead>
         <tbody>
