@@ -86,7 +86,8 @@ body {
   margin-bottom: 1rem;
 }
 
-.filter {
+.filter,
+.tool {
   background: white;
   border: 2px solid var(--navy);
   color: var(--navy);
@@ -97,7 +98,8 @@ body {
 }
 
 .filter:hover,
-.filter.active {
+.filter.active,
+.tool:hover {
   background: var(--navy);
   color: white;
 }
@@ -139,6 +141,55 @@ tr:hover td {
 tr.none td {
   color: var(--muted);
   font-style: italic;
+}
+
+/* H/A column */
+td:nth-child(3),
+th:nth-child(3) {
+  text-align: center;
+  width: 60px;
+}
+
+/* Score column */
+td.score,
+th:last-child {
+  width: 110px;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+td.score input {
+  width: 40px;
+  padding: 0.2rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Result colours */
+tr.win td.score {
+  color: var(--home);
+}
+
+tr.loss td.score {
+  color: var(--away);
+}
+
+tr.draw td.score {
+  color: var(--gold);
+}
+
+/* Edit / save buttons */
+.score-tools {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+#save-message {
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 /* H / A badges */
