@@ -128,40 +128,40 @@ function readInputs() {
   return newScores;
 }
 
-// Save the scores to a file (and to the browser as a backup)
+// Send the scores to the Netlify Function, which commits scores.json to GitHub.
+// Netlify then rebuilds the site so everyone sees the new scores.
 async function saveScores() {
-  scores = readInputs();
-  const text = JSON.stringify(scores, null, 2);
+  const newScores = readInputs();
+  saveButton.disabled = true;
+  saveMessage.textContent = "Saving...";
 
   try {
-    localStorage.setItem(STORAGE_KEY, text);
-  } catch (error) {
-    // Browser storage not available, the file is still saved below
-  }
-
-  try {
-    if (window.showSaveFilePicker) {
-      // Chrome / Edge: choose scores.json in the project folder to overwrite it
-      const handle = await window.showSaveFilePicker({
-        suggestedName: "scores.json",
-        types: [{ description: "JSON file", accept: { "application/json": [".json"] } }],
-      });
-      const file = await handle.createWritable();
-      await file.write(text);
-      await file.close();
-    } else {
-      // Other browsers: download the file instead
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(new Blob([text], { type: "application/json" }));
-      link.download = "scores.json";
-      link.click();
-      URL.revokeObjectURL(link.href);
+    const response = await fetch("/.netlify/functions/save-scores", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newScores),
+    });
+    const result = await response.json().catch(function () {
+      return {};
+    });
+    if (!response.ok) {
+      throw new Error(result.error || "Save failed");
     }
-    saveMessage.textContent = "Scores saved.";
+
+    scores = newScores;
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(scores));
+    } catch (error) {
+      // Browser storage not available, scores are still saved online
+    }
+    saveMessage.textContent = "Saved - live for everyone in about a minute.";
   } catch (error) {
-    saveMessage.textContent = "File not saved (scores kept in this browser).";
+    saveButton.disabled = false;
+    saveMessage.textContent = "Not saved: " + error.message;
+    return; // stay in edit mode so nothing typed is lost
   }
 
+  saveButton.disabled = false;
   editing = false;
   editButton.textContent = "Edit scores";
   saveButton.hidden = true;
